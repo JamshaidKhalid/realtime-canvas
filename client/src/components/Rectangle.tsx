@@ -1,3 +1,4 @@
+import Konva from "konva";
 import { Rect } from "react-konva";
 import { useCanvasStore } from "../store/useCanvasStore";
 import { useSocket } from "../hooks/useSocket";
@@ -12,12 +13,12 @@ const Rectangle = ({ id, x, y }: Props) => {
   const updateRect = useCanvasStore((s) => s.updateRect);
   const socket = useSocket();
 
-  const handleDragMove = (e: any) => {
-    const newX = e.target.x();
-    const newY = e.target.y();
-    updateRect(id, newX, newY);
-    socket.emit("rectangle:move", { id, x: newX, y: newY });
-  };
+const handleDragMove = (e: Konva.KonvaEventObject<DragEvent>) => {
+  const newX = e.target.x();
+  const newY = e.target.y();
+  updateRect(id, newX, newY);
+  socket.emit("rectangle:move", { id, x: newX, y: newY });
+};
 
   return (
     <Rect

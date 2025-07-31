@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { io, Socket } from "socket.io-client";
+import { SERVER_URL } from "../config/constants";
 import { useCanvasStore } from "../store/useCanvasStore";
 
-const socket: Socket = io(import.meta.env.VITE_SOCKET_SERVER_URL);
+const socket: Socket = io(SERVER_URL);
 
 export const useSocket = () => {
   const addRect = useCanvasStore((s) => s.addRect);
